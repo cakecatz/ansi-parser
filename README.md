@@ -4,14 +4,15 @@ Parser for string that include ansi codes.
 
 ## Install
 
-TODO
+```sh
+npm i @cakecatz/ansi-parser
+```
 
 ## Usage
 
 ```ts
-import { ansiParser } from "ansi-parser";
-
-const cells = ansiParser("\u001b[31mhello\u001b[39m");
+const { parseAnsi } = require("@cakecatz/ansi-parser");
+const cells = parseAnsi("\u001b[31mhello\u001b[39m");
 ```
 
 `cells` will be like this.
