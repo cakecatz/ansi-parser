@@ -1,11 +1,166 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`bold modifier 1`] = `
+Array [
+  Object {
+    "bg": 0,
+    "bold": true,
+    "content": "hello, world",
+    "dim": false,
+    "fg": 0,
+    "inverse": false,
+    "italic": false,
+    "underline": false,
+  },
+]
+`;
+
+exports[`inverse modifier 1`] = `
+Array [
+  Object {
+    "bg": 0,
+    "bold": false,
+    "content": "hello, world",
+    "dim": false,
+    "fg": 0,
+    "inverse": true,
+    "italic": false,
+    "underline": false,
+  },
+]
+`;
+
+exports[`italic modifier 1`] = `
+Array [
+  Object {
+    "bg": 0,
+    "bold": false,
+    "content": "hello, world",
+    "dim": false,
+    "fg": 0,
+    "inverse": false,
+    "italic": true,
+    "underline": false,
+  },
+]
+`;
+
+exports[`multiple modifiers and colors 1`] = `
+Array [
+  Object {
+    "bg": 0,
+    "bold": false,
+    "content": "START",
+    "dim": false,
+    "fg": 0,
+    "inverse": false,
+    "italic": false,
+    "underline": false,
+  },
+  Object {
+    "bg": 0,
+    "bold": false,
+    "content": "INVERSE",
+    "dim": false,
+    "fg": 0,
+    "inverse": true,
+    "italic": false,
+    "underline": false,
+  },
+  Object {
+    "bg": 0,
+    "bold": false,
+    "content": "BLUE",
+    "dim": false,
+    "fg": 4,
+    "inverse": false,
+    "italic": false,
+    "underline": false,
+  },
+  Object {
+    "bg": 0,
+    "bold": false,
+    "content": "UNDERLINE",
+    "dim": false,
+    "fg": 7,
+    "inverse": false,
+    "italic": false,
+    "underline": true,
+  },
+  Object {
+    "bg": 0,
+    "bold": false,
+    "content": "RED",
+    "dim": false,
+    "fg": 1,
+    "inverse": false,
+    "italic": false,
+    "underline": true,
+  },
+  Object {
+    "bg": 0,
+    "bold": true,
+    "content": "BOLD",
+    "dim": false,
+    "fg": 7,
+    "inverse": false,
+    "italic": false,
+    "underline": true,
+  },
+  Object {
+    "bg": 7,
+    "bold": false,
+    "content": "END",
+    "dim": false,
+    "fg": 0,
+    "inverse": false,
+    "italic": false,
+    "underline": true,
+  },
+]
+`;
+
+exports[`parse string not included ansi codes 1`] = `
+Array [
+  Object {
+    "bg": 0,
+    "bold": false,
+    "content": "hello,world",
+    "dim": false,
+    "fg": 0,
+    "inverse": false,
+    "italic": false,
+    "underline": false,
+  },
+]
+`;
+
 exports[`string with ansi color 1`] = `
 Array [
   Object {
     "bg": 0,
+    "bold": false,
     "content": "hello, world",
+    "dim": false,
     "fg": 4,
+    "inverse": false,
+    "italic": false,
+    "underline": false,
+  },
+]
+`;
+
+exports[`underline modifier 1`] = `
+Array [
+  Object {
+    "bg": 0,
+    "bold": false,
+    "content": "hello, world",
+    "dim": false,
+    "fg": 0,
+    "inverse": false,
+    "italic": false,
+    "underline": true,
   },
 ]
 `;

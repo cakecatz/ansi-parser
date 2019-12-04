@@ -14,15 +14,15 @@ export const enum COLOR_CODES {
 const enum ANSI_CODES {
   NONE = 0,
   BOLD = 1,
-  FAINT = 2,
-  STANDOUT = 3,
+  // FAINT = 2,
+  ITALIC = 3, // Not widely supported. Sometimes treated as inverse.
   UNDERLINE = 4,
-  BLINK = 5,
-  // fast-blink 6
-  REVERSE = 7,
-  CONCEAL = 8,
-  STRIKETHROUGH = 9,
-  NORMAL = 22
+  REVERSE = 7, // swap foreground and background colors
+  // CONCEAL = 8,
+  // STRIKETHROUGH = 9,
+  NORMAL_COLOR_OR_INTENSITY = 22,
+  UNDERLINE_OFF = 24,
+  INVERSE_OFF = 27
 }
 
 const colorMap: Record<number, COLOR_CODES> = {
@@ -34,7 +34,7 @@ const colorMap: Record<number, COLOR_CODES> = {
   35: COLOR_CODES.MAGENTA,
   36: COLOR_CODES.CYAN,
   37: COLOR_CODES.WHITE,
-  // 38: iso 8316 6
+  // 38
   39: COLOR_CODES.WHITE,
   40: COLOR_CODES.BLACK,
   41: COLOR_CODES.RED,
@@ -44,6 +44,7 @@ const colorMap: Record<number, COLOR_CODES> = {
   45: COLOR_CODES.MAGENTA,
   46: COLOR_CODES.CYAN,
   47: COLOR_CODES.WHITE,
+  // 48
   49: COLOR_CODES.BLACK
 };
 
@@ -51,7 +52,23 @@ interface Cell {
   content: string;
   fg: COLOR_CODES;
   bg: COLOR_CODES;
+  // modifier
+  bold: boolean;
+  underline: boolean;
+  inverse: boolean;
+  italic: boolean;
 }
+
+const defaultModifier = {
+  bold: false,
+  underline: false,
+  inverse: false,
+  dim: false,
+  italic: false
+};
+
+const defaultBackgroundColor = colorMap[37];
+const defaultForegroundColor = colorMap[49];
 
 export function parseAnsi(str: string): Cell[] {
   const re = ansiRegex();
@@ -61,6 +78,7 @@ export function parseAnsi(str: string): Cell[] {
   let currentPos = 0;
   let bg: COLOR_CODES = 0;
   let fg: COLOR_CODES = 0;
+  let modifier = Object.assign({}, defaultModifier);
   while ((match = re.exec(str))) {
     // add prev content
     const content = str.slice(currentPos, match.index);
@@ -68,7 +86,8 @@ export function parseAnsi(str: string): Cell[] {
       cells.push({
         content,
         fg,
-        bg
+        bg,
+        ...modifier
       });
     }
 
@@ -85,8 +104,29 @@ export function parseAnsi(str: string): Cell[] {
       } else {
         switch (code) {
           case ANSI_CODES.NONE:
-            bg = colorMap[37];
-            fg = colorMap[49];
+            bg = defaultBackgroundColor;
+            fg = defaultForegroundColor;
+            modifier = defaultModifier;
+            break;
+          case ANSI_CODES.BOLD:
+            modifier.bold = true;
+            break;
+          case ANSI_CODES.UNDERLINE:
+            modifier.underline = true;
+            break;
+          case ANSI_CODES.REVERSE:
+            modifier.inverse = true;
+            break;
+          case ANSI_CODES.ITALIC:
+            modifier.italic = true;
+            break;
+          case ANSI_CODES.INVERSE_OFF:
+            modifier.inverse = false;
+            break;
+          case ANSI_CODES.NORMAL_COLOR_OR_INTENSITY:
+            bg = defaultBackgroundColor;
+            fg = defaultForegroundColor;
+            modifier.bold = false;
             break;
         }
       }
@@ -100,7 +140,8 @@ export function parseAnsi(str: string): Cell[] {
     cells.push({
       content,
       fg,
-      bg
+      bg,
+      ...modifier
     });
   }
 
