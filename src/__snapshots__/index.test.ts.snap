@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`string with ansi color 1`] = `
+Array [
+  Object {
+    "bg": 0,
+    "content": "hello, world",
+    "fg": 4,
+  },
+]
+`;

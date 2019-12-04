@@ -1,0 +1,22 @@
+{
+  "name": "ansi-parser",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "repository": "ssh://git@github.com/cakecatz/ansi-parser.git",
+  "author": "Ryo Narita <mail.ryonarita@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "chalk": "^3.0.0",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "ansi-regex": "^5.0.0"
+  }
+}
