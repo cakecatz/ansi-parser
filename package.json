@@ -1,13 +1,17 @@
 {
-  "name": "ansi-parser",
+  "name": "@cakecatz/ansi-parser",
   "version": "1.0.0",
   "main": "lib/index.js",
-  "repository": "ssh://git@github.com/cakecatz/ansi-parser.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/cakecatz/ansi-parser.git"
+  },
   "author": "Ryo Narita <mail.ryonarita@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
@@ -19,5 +23,10 @@
   },
   "dependencies": {
     "ansi-regex": "^5.0.0"
-  }
+  },
+  "description": "Parser for string that include ansi codes.",
+  "bugs": {
+    "url": "https://github.com/cakecatz/ansi-parser/issues"
+  },
+  "homepage": "https://github.com/cakecatz/ansi-parser#readme"
 }
